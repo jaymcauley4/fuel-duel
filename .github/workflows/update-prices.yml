@@ -5,6 +5,9 @@ on:
     - cron: '0 */6 * * *'   # 4x per day: midnight, 6am, noon, 6pm UTC
   workflow_dispatch:          # manual trigger from Actions tab
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   update-prices:
     runs-on: ubuntu-latest
