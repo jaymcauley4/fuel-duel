@@ -1,0 +1,32 @@
+# Python virtual environment
+venv/
+.venv/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables and secrets
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+credentials.json
+
+# macOS metadata
+.DS_Store
+
+# Editor / IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Playwright artifacts
+playwright-report/
+test-results/
+
+# Logs
+*.log

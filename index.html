@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Fuel Duel — Sarnia vs Port Huron</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ─── HERO ─────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="bridge-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <h1>Fuel Duel</h1>
+      <p class="tagline">Sarnia vs Port Huron Fuel Costs</p>
+    </div>
+  </header>
+
+  <!-- ─── MAIN ─────────────────────────────────────────── -->
+  <main>
+
+    <!-- Inputs row -->
+    <div class="inputs-row">
+
+      <!-- Tank capacity -->
+      <div class="card input-card">
+        <div class="card-header">
+          <span class="card-icon tank-icon">&#x1F4A7;</span>
+          <span class="card-label">Vehicle Tank Capacity</span>
+        </div>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="tank"
+            inputmode="decimal"
+            pattern="[0-9]*\.?[0-9]*"
+            value="60"
+            autocomplete="off"
+            aria-label="Tank capacity in litres"
+          >
+          <span class="input-unit">Litres</span>
+        </div>
+      </div>
+
+      <!-- Bridge toll toggle -->
+      <div class="card input-card toll-card" id="toll-card">
+        <div class="card-header">
+          <span class="card-icon toll-icon">&#x2197;</span>
+          <span class="card-label">Bridge Toll Logic</span>
+        </div>
+        <label class="toggle-row" for="toll-toggle" aria-label="Include bridge toll in calculation">
+          <span class="toll-status" id="toll-status">Active</span>
+          <span class="toggle-track">
+            <input type="checkbox" id="toll-toggle" checked>
+            <span class="toggle-thumb" aria-hidden="true"></span>
+          </span>
+        </label>
+        <p class="toll-detail" id="toll-detail">7 CAD + 5 USD Round Trip</p>
+      </div>
+
+    </div>
+
+    <!-- Price cards -->
+    <div class="prices-row">
+
+      <div class="card price-card" id="sarnia-card">
+        <div class="price-header">
+          <span class="price-city">Sarnia, ON</span>
+          <span class="flag" aria-label="Canada">&#x1F1E8;&#x1F1E6;</span>
+        </div>
+        <div class="price-number" id="sarnia-price">--</div>
+        <div class="price-unit">CAD / L</div>
+        <div class="price-station" id="sarnia-station">--</div>
+        <div class="price-divider"></div>
+        <div class="price-total-label">Total to Fill (CAD)</div>
+        <div class="price-total" id="sarnia-total">--</div>
+      </div>
+
+      <div class="card price-card" id="ph-card">
+        <div class="price-header">
+          <span class="price-city">Port Huron, MI</span>
+          <span class="flag" aria-label="United States">&#x1F1FA;&#x1F1F8;</span>
+        </div>
+        <div class="price-number" id="ph-price">--</div>
+        <div class="price-unit">USD / GAL</div>
+        <div class="price-station" id="ph-station">--</div>
+        <div class="price-divider"></div>
+        <div class="price-total-label">Total to Fill (CAD)</div>
+        <div class="price-total" id="ph-total">--</div>
+      </div>
+
+    </div>
+
+    <!-- Verdict -->
+    <div class="card verdict-card" id="verdict-card">
+      <div class="verdict-icon" id="verdict-icon" aria-hidden="true">&#x1F341;</div>
+      <div class="verdict-label">Potential Savings</div>
+      <div class="verdict-amount" id="verdict-amount">Calculating&hellip;</div>
+    </div>
+
+    <!-- Footer meta -->
+    <footer class="page-footer">
+      <span id="last-updated">Loading prices&hellip;</span>
+    </footer>
+
+  </main>
+
+  <!-- Error banner (hidden unless needed) -->
+  <div class="error-banner" id="error-banner" role="alert" hidden>
+    <span id="error-msg">Price data unavailable. Check back soon.</span>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

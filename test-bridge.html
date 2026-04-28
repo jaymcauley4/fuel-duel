@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bridge Image Test</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: white;
+    font-family: system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ─── OPTION C — Desaturated Film ───
+     Greyscale + low opacity, feels like film negative.
+     Try this one first. */
+  .option {
+    position: relative;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #222;
+  }
+
+  .option-label {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    z-index: 2;
+  }
+
+  .option h1 {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+
+  .option p {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/bridge.jpg');
+    background-size: cover;
+    background-position: center 40%;
+  }
+
+  /* ── Option C: Desaturated Film ── */
+  #c .bg {
+    filter: grayscale(100%);
+    opacity: 0.22;
+  }
+
+  /* ── Option B: Gradient Reveal ── */
+  #b .bg {
+    filter: grayscale(100%) brightness(0.6);
+    opacity: 0.9;
+    mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+  }
+
+  /* ── Option W: Wireframe / Artifact ──
+     Inverts and crushes contrast so only structural lines glow.
+     This is the "Linear artifact" approach. */
+  #w .bg {
+    filter: grayscale(100%) contrast(400%) brightness(12%) invert(100%);
+    opacity: 0.4;
+    mix-blend-mode: screen;
+  }
+
+  /* Bottom fade (applies to all) */
+  .option::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #0a0a0a);
+    z-index: 1;
+  }
+
+  .instructions {
+    padding: 24px 20px;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .instructions strong { color: #888; }
+</style>
+</head>
+<body>
+
+<div class="option" id="c">
+  <span class="option-label">Option C — Desaturated Film</span>
+  <div class="bg"></div>
+  <h1>Fuel Duel</h1>
+  <p>Sarnia vs Port Huron Fuel Costs</p>
+</div>
+
+<div class="option" id="b">
+  <span class="option-label">Option B — Gradient Reveal</span>
+  <div class="bg"></div>
+  <h1>Fuel Duel</h1>
+  <p>Sarnia vs Port Huron Fuel Costs</p>
+</div>
+
+<div class="option" id="w">
+  <span class="option-label">Option W — Wireframe / Artifact</span>
+  <div class="bg"></div>
+  <h1>Fuel Duel</h1>
+  <p>Sarnia vs Port Huron Fuel Costs</p>
+</div>
+
+<div class="instructions">
+  <strong>How to use this file:</strong><br>
+  Open DevTools (right-click → Inspect), click the element picker,
+  select a <code>.bg</code> div and edit its <code>filter</code> and <code>opacity</code>
+  values live until you like how it looks. Then tell me which option and I'll lock
+  those values into the main site.<br><br>
+  <strong>Note:</strong> bridge.jpg must be saved to <code>assets/bridge.jpg</code> first.
+</div>
+
+</body>
+</html>

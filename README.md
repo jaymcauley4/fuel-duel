@@ -12,11 +12,25 @@ A small website that compares **current gas prices between Sarnia, ON (Canada) a
 
 ```
 Fuel Duel/
+├── .github/
+│   └── workflows/
+│       └── update-prices.yml  # Runs scraper on a schedule (every 6 hours via GitHub Actions)
+├── assets/
+│   └── bridge.jpg             # Hero background image
+├── css/
+│   └── style.css              # All styles
+├── data/
+│   └── prices.json            # Latest prices — auto-updated by the scraper
+├── js/
+│   └── app.js                 # All calculations and display logic
 ├── scraper/
-│   └── scraper.py     # Fetches live prices from GasBuddy (run via GitHub Actions)
-├── venv/              # Python virtual environment (NOT tracked in git)
-├── .gitignore         # Files git should ignore
-└── README.md          # This file
+│   ├── scraper.py             # Core scraping function (fetches price from GasBuddy)
+│   ├── update_prices.py       # Scraper job — fetches both stations + FX rate, writes prices.json
+│   └── probe.py               # Developer diagnostic tool (one-off page dump, not used in production)
+├── venv/                      # Python virtual environment (NOT tracked in git)
+├── index.html                 # The webpage
+├── STATIONS.md                # How to change stations — read this before touching any station IDs
+└── README.md                  # This file
 ```
 
 ## How to start working on the project (every time)
@@ -36,14 +50,17 @@ To leave the sandbox when you're done:
 deactivate
 ```
 
-## Build status
+## Running the scraper manually
 
-| Component | Status | Notes |
-|---|---|---|
-| `scraper/scraper.py` | ✅ Done | Fetches Regular price from both stations |
-| GitHub Actions workflow | 🔜 Next | Runs scraper on a schedule, writes `prices.json` |
-| `prices.json` | 🔜 Next | Static file the webpage reads |
-| Webpage | 🔜 Next | Reads `prices.json`, does unit/currency conversion, shows winner |
+To fetch fresh prices right now without waiting for the scheduled job:
+
+```bash
+cd "/Users/jaymcauley/Projects/Fuel Duel"
+source venv/bin/activate
+python scraper/update_prices.py
+```
+
+A successful run prints both prices, the FX rate, and `Written to data/prices.json`.
 
 ## Scraper details
 
@@ -53,6 +70,8 @@ Fetches the Regular unleaded price from two GasBuddy station pages using Playwri
 |---|---|---|---|
 | 40 Fuel, Sarnia ON | 199752 | gasbuddy.com/station/199752 | CAD ¢/L |
 | Speedway, Port Huron MI | 53084 | gasbuddy.com/station/53084 | USD/gal |
+
+> To change either station, see **STATIONS.md** — it lists every file that needs updating.
 
 **Selector** (verified 2026-04-27):
 ```

@@ -1,0 +1,478 @@
+/* ══════════════════════════════════════════════
+   FUEL DUEL — Dark Theme, Mobile-First
+   ══════════════════════════════════════════════ */
+
+/* ─── Reset & Base ──────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #0a0a0a;
+  --card-bg:     #111111;
+  --border:      rgba(255,255,255,0.07);
+  --text:        #ffffff;
+  --muted:       #666666;
+  --label:       #444444;
+  --green:       #22c55e;
+  --green-dim:   rgba(34,197,94,0.12);
+  --gold:        #f59e0b;
+  --blue:        #3b82f6;
+  --radius:      14px;
+  --gap:         10px;
+  --pad-x:       16px;
+  --pad-y:       14px;
+  font-size: 16px;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Hero ──────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Bridge image — Desaturated Film style. */
+.bridge-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/bridge.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  filter: grayscale(100%);
+  opacity: 0.18;
+}
+
+/* Gradient fade at bottom so image doesn't bleed into cards */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: clamp(52px, 16vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  /* Metallic chrome gradient matching the design mockup */
+  background: linear-gradient(180deg,
+    #e8e8e8 0%,
+    #ffffff 35%,
+    #c0c0c0 65%,
+    #8a8a8a 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ─── Main Layout ───────────────────────────── */
+main {
+  padding: 12px var(--pad-x) 24px;
+  max-width: 680px;
+  margin: -60px auto 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* ─── Cards ─────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--pad-y) var(--pad-x);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+
+.card-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tank-icon { filter: hue-rotate(180deg) saturate(3) brightness(0.5) sepia(0.2); }
+.toll-icon { color: var(--gold); }
+
+/* ─── Inputs Row ────────────────────────────── */
+.inputs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+/* Tank input */
+.input-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+#tank {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: clamp(32px, 8vw, 44px);
+  font-weight: 700;
+  line-height: 1;
+  width: 100%;
+  min-width: 0;
+  caret-color: var(--green);
+  /* Remove number input spinners */
+  -moz-appearance: textfield;
+}
+
+#tank::-webkit-inner-spin-button,
+#tank::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#tank:focus {
+  color: var(--text);
+}
+
+
+.input-unit {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* Toll card */
+.toll-card {
+  transition: border-color 0.2s;
+}
+
+.toll-card.active {
+  border-color: rgba(34,197,94,0.3);
+  background: linear-gradient(135deg, #111111 0%, rgba(34,197,94,0.04) 100%);
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+}
+
+.toll-status {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green);
+  transition: color 0.2s;
+}
+
+.toll-card:not(.active) .toll-status {
+  color: var(--muted);
+}
+
+/* Toggle switch */
+.toggle-track {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.toggle-track input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-thumb {
+  position: absolute;
+  inset: 0;
+  background: #2a2a2a;
+  border-radius: 26px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.toggle-thumb::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: var(--muted);
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.toggle-track input:checked + .toggle-thumb {
+  background: rgba(34,197,94,0.25);
+}
+
+.toggle-track input:checked + .toggle-thumb::before {
+  transform: translateX(20px);
+  background: var(--green);
+}
+
+.toll-detail {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.toll-card.active .toll-detail {
+  color: rgba(34,197,94,0.6);
+}
+
+/* ─── Price Cards ───────────────────────────── */
+.prices-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.price-card {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.price-card.winner {
+  border-color: rgba(34,197,94,0.25);
+  box-shadow: 0 0 0 1px rgba(34,197,94,0.1) inset;
+}
+
+.price-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.price-city {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.flag {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.price-number {
+  font-size: clamp(28px, 7vw, 38px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.price-unit {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-top: 2px;
+}
+
+.price-station {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label);
+  margin-top: 3px;
+}
+
+.price-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 0;
+}
+
+.price-total-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.price-total {
+  font-size: clamp(20px, 5.5vw, 28px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Verdict Card ──────────────────────────── */
+.verdict-card {
+  text-align: center;
+  padding: 24px var(--pad-x);
+  border-color: rgba(255,255,255,0.05);
+  /* Subtle blue-navy gradient like the mockup */
+  background: linear-gradient(160deg, #0f1520 0%, #111827 100%);
+  border-color: rgba(99,130,255,0.12);
+}
+
+.verdict-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 12px;
+  line-height: 1;
+  box-shadow: 0 0 24px rgba(255,255,255,0.08);
+}
+
+.verdict-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.verdict-amount {
+  font-size: clamp(28px, 8vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.verdict-amount .savings-muted {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.verdict-amount .savings-winner {
+  color: var(--text);
+  font-weight: 800;
+}
+
+/* ─── Footer ────────────────────────────────── */
+.page-footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--label);
+  padding-top: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Error Banner ──────────────────────────── */
+.error-banner {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a0a0a;
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #ef4444;
+  z-index: 99;
+  white-space: nowrap;
+}
+
+/* ─── Desktop ───────────────────────────────── */
+@media (min-width: 640px) {
+  :root {
+    --gap:   14px;
+    --pad-x: 20px;
+    --pad-y: 18px;
+  }
+
+  .hero {
+    height: 320px;
+  }
+
+  main {
+    padding: 16px var(--pad-x) 40px;
+  }
+
+  .inputs-row,
+  .prices-row {
+    gap: var(--gap);
+  }
+
+  .card-label {
+    font-size: 11px;
+  }
+
+  .price-city {
+    font-size: 11px;
+  }
+
+  .price-unit,
+  .price-station,
+  .price-total-label {
+    font-size: 10px;
+  }
+
+  .verdict-card {
+    padding: 32px var(--pad-x);
+  }
+}
