@@ -8,8 +8,9 @@
   "port_huron": {
     "price_usd_per_gallon": 4.05,
     "station_name": "Speedway",
-    "fetched_at": "2026-06-19T19:53:30.877711+00:00"
+    "fetched_at": "2026-06-19T19:53:30.877711+00:00",
+    "error": "timeout"
   },
-  "updated_at": "2026-06-19T19:53:30.930969+00:00",
-  "fx_usd_cad": 1.410096
+  "updated_at": "2026-06-20T04:00:47.253985+00:00",
+  "fx_usd_cad": 1.415771
 }
