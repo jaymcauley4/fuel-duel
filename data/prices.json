@@ -2,13 +2,13 @@
   "sarnia": {
     "price_cad_cents_per_litre": 159.6,
     "station_name": "40 Fuel",
-    "fetched_at": "2026-07-26T03:17:59.224789+00:00"
+    "fetched_at": "2026-07-26T08:30:34.839167+00:00"
   },
   "port_huron": {
     "price_usd_per_gallon": 4.29,
     "station_name": "Speedway",
-    "fetched_at": "2026-07-26T03:18:03.307361+00:00"
+    "fetched_at": "2026-07-26T08:30:38.864091+00:00"
   },
-  "updated_at": "2026-07-26T03:18:03.428014+00:00",
-  "fx_usd_cad": 1.40942
+  "updated_at": "2026-07-26T08:30:39.017362+00:00",
+  "fx_usd_cad": 1.409449
 }
